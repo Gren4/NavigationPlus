@@ -103,8 +103,6 @@ func initiate() -> void:
 		polygon = file.get_var()
 		var astar_points : Dictionary = file.get_var()
 		var link_info : Dictionary = file.get_var()
-		
-		file.close()
 		links_col = link_info["links_col"]
 		link_one = link_info["link_one"]
 		link_two = link_info["link_two"]
@@ -118,6 +116,7 @@ func initiate() -> void:
 			thread2.start(self,"_read_astar_fly",astar_fly_points)
 			thread2.wait_to_finish()
 		thread1.wait_to_finish()
+		file.close()
 		mutex = Mutex.new()
 		close_thread = false
 		main_thread = Thread.new()
@@ -438,12 +437,12 @@ func _generate_fly_astar_points() -> void:
 	var zones  = get_tree().get_nodes_in_group("FlyZones")
 	for z in zones:
 		z.setup_info()
-	check_and_place(zones, ray, zones[0].StartPoint, astar_info)
+	astar_info = check_and_place(zones, ray, zones[0].StartPoint, astar_info)
 	if Engine.editor_hint:
 		file.store_var(astar_info,true)
 	return
 
-func check_and_place(z : Array, ray : PhysicsDirectSpaceState, start : Vector3, astar_info : Dictionary) -> void:
+func check_and_place(z : Array, ray : PhysicsDirectSpaceState, start : Vector3, astar_info : Dictionary) -> Dictionary:
 	var fly_points_id : Array = []
 	var stack : Array = [start]
 	var fly_points_locale : Array = []
@@ -519,4 +518,4 @@ func check_and_place(z : Array, ray : PhysicsDirectSpaceState, start : Vector3, 
 		if dead_end == true:
 			stack.pop_back()
 			id_stack.pop_back()
-	return
+	return astar_info
