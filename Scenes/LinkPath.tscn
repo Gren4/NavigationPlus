@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/NavigationPlus/Scripts/LinkPath.gd" type="Script" id=1]
+
+[node name="LinkPath" type="Spatial"]
+script = ExtResource( 1 )
+step_gridy = 10
