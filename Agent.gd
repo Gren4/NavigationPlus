@@ -84,7 +84,6 @@ func _physics_process(delta):
 				direction = dir_to_path
 				if use_link:
 					var dtp_l = link_from - self.global_transform.origin
-					print(dtp_l.length_squared())
 					if dtp_l.length_squared() <= 2.25:
 						if nav_plus.check_path(link_id_one):
 							nav_plus.disable_path(link_id_one)
