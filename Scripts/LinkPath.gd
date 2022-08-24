@@ -2,7 +2,7 @@ tool
 extends Spatial
 class_name NavPlusLinkPath
 
-const SAVE_PATH := "res://Nav/"
+export(String) var SAVE_PATH := "res://Nav/"
 
 var first_time : bool = true
 export (bool) var generate_nav setget _generate
@@ -128,7 +128,7 @@ func initiate() -> void:
 func make_request(info : Dictionary) -> void:
 	mutex.lock()
 	for i in requests:
-		if i == info["obj"]:
+		if i["obj"] == info["obj"]:
 			i["to"] = info["to"]
 			i["from"] = info["from"]
 			mutex.unlock()

@@ -2,6 +2,8 @@ tool
 extends Position3D
 class_name NavPlusNavLink
 
+export(int) var Bit_mask = 1
+
 enum LINKTYPE {
 	JUMP,
 	TELEPORT,
@@ -15,7 +17,7 @@ func get_one() -> Vector3:
 	if Engine.editor_hint:
 		var One = self.global_transform.origin
 		var space_state : PhysicsDirectSpaceState = get_world().direct_space_state
-		var result = space_state.intersect_ray(One,One + Vector3(0,-5,0),[],2)
+		var result = space_state.intersect_ray(One,One + Vector3(0,-5,0),[],Bit_mask)
 		return result["position"] + Vector3(0,2,0)
 	else:
 		return Vector3.ZERO
@@ -24,7 +26,7 @@ func get_two() -> Vector3:
 	if Engine.editor_hint:
 		var Two = $To.global_transform.origin
 		var space_state : PhysicsDirectSpaceState = get_world().direct_space_state
-		var result = space_state.intersect_ray(Two,Two + Vector3(0,-5,0),[],2)
+		var result = space_state.intersect_ray(Two,Two + Vector3(0,-5,0),[],Bit_mask)
 		return result["position"] + Vector3(0,2,0)
 	else:
 		return Vector3.ZERO
