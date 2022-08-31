@@ -2,8 +2,6 @@ extends Camera
 
 signal surface_hit(position)
 
-
-
 var mouse_pressed: bool
 
 func _unhandled_input(event):
