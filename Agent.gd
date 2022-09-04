@@ -2,11 +2,9 @@ extends KinematicBody
 
 export(NodePath) var nav_plus_path = null
 export(NodePath) var nav_agent_path = null
-export(NodePath) var to_path = null
 
 onready var nav_plus : NavPlusLinkPath = get_node(nav_plus_path)
 onready var nav_agent : NavigationAgent = get_node(nav_agent_path)
-onready var to = get_node(to_path)
 
 var link_from : Vector3 = Vector3.ZERO
 var link_to : Vector3 = Vector3.ZERO
